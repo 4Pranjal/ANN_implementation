@@ -1,0 +1,46 @@
+This code demonstrates the process of creating, training, and evaluating an Artificial Neural Network (ANN) using TensorFlow. The ANN is used for predicting customer churn based on a dataset named 'Churn_Modelling.csv'. Let's go through the code step by step:
+
+1. **Installing and Importing Libraries:**
+   - The code begins by installing TensorFlow using `!pip install tensorflow`.
+   - TensorFlow is imported using `import tensorflow as tf`.
+   - Other necessary libraries like `numpy`, `matplotlib.pyplot`, and `pandas` are imported.
+
+2. **Loading the Dataset:**
+   - The code reads the dataset 'Churn_Modelling.csv' using `pd.read_csv()` and displays the first few rows using `dataset.head()`.
+
+3. **Data Preparation:**
+   - The dataset is divided into independent features (X) and the dependent feature (y).
+   - The 'Geography' and 'Gender' columns are one-hot encoded using `pd.get_dummies()`.
+   - The one-hot encoded columns are concatenated with the original feature set.
+   - The dataset is split into training and testing sets using `train_test_split()`.
+   - The independent features are scaled using `StandardScaler`.
+
+4. **Creating the Neural Network:**
+   - A Sequential model is initialized using `Sequential()`.
+   - Dense layers are added for the input layer and two hidden layers, followed by an output layer.
+   - Activation functions used for the layers are 'relu' (Rectified Linear Unit) for hidden layers and 'sigmoid' for the output layer.
+   - The model is compiled with the 'Adam' optimizer, 'binary_crossentropy' loss function (appropriate for binary classification), and accuracy as a metric.
+
+5. **Early Stopping:**
+   - Early stopping is implemented using the `EarlyStopping` callback from TensorFlow.
+   - This callback monitors the validation loss and stops training if it doesn't improve after a certain number of epochs.
+
+6. **Training the Model:**
+   - The model is trained using `fit()`.
+   - Training data is provided along with a validation split, batch size, and number of epochs.
+   - The `EarlyStopping` callback is passed to monitor training progress.
+
+7. **Visualizing Training History:**
+   - Training history is stored in the `model_history` object.
+   - Plots are created to visualize training accuracy and loss (`accuracy` vs. `val_accuracy`, and `loss` vs. `val_loss`).
+
+8. **Making Predictions and Evaluation:**
+   - Predictions are made on the test set using `classifiers.predict()`.
+   - A threshold of 0.5 is used to convert the predicted probabilities into binary values (0 or 1).
+   - A confusion matrix is computed using `confusion_matrix()` to evaluate the model's performance.
+   - Accuracy is calculated using `accuracy_score()`.
+
+9. **Extracting Weights:**
+   - The code fetches the weights of the trained model using `classifiers.get_weights()`.
+
+Overall, this code showcases the complete process of building an ANN for binary classification using TensorFlow. It covers data loading, preprocessing, model creation, training, early stopping, visualization of training history, making predictions, evaluating the model's accuracy, and accessing the trained weights.
